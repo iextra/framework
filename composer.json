@@ -1,0 +1,29 @@
+{
+  "name": "plainway/framework",
+  "type": "project",
+  "description": "Plain PHP framework",
+  "license": "MIT",
+  "require": {
+    "php": "^8.1",
+    "extro/http-kernel": "^1.0",
+    "extro/http-request-handler": "^1.0",
+    "extro/di": "^1.0",
+    "extro/http-router": "^1.0",
+    "extro/view-engine": "^1.0",
+    "laminas/laminas-diactoros": "^2.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "PlainWay\\": "src/",
+      "App\\Config\\": "config/"
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "PlainWay\\Installer::postInstall"
+    ],
+    "post-update-cmd": [
+      "PlainWay\\Installer::postInstall"
+    ]
+  }
+}

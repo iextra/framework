@@ -1,0 +1,32 @@
+# Disable directory listing
+Options All -Indexes
+
+<IfModule mod_rewrite.c>
+
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^\.git/(.*)$ / [R=301,L]
+
+    # Redirect trailing slashes if not a folder
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Remove index.php
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^(.*)index\.php$ $1 [R=301,L]
+
+    # Redirect all file requests not in /public directory
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteCond %{REQUEST_URI} !^/public/(.+)
+    RewriteRule ^(.*)$ /public/$1 [L]
+
+    # Redirect to /public
+    RewriteEngine on
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule . /public/ [L]
+    RewriteRule ^(/)?$ /public/ [L]
+</IfModule>
